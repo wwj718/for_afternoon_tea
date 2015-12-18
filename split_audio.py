@@ -19,7 +19,7 @@ from audio_config import min_silence_len,silence_thresh,keep_silence,filename_pr
 
 
 def export_audio(audio_chunk,filename_prefix="unit1_word",index=1,audio_format="mp3"):
-    audio_chunk.export("{filename_prefix}{index}.mp3".format(filename_prefix=filename_prefix,index=i), format=audio_format)
+    audio_chunk.export("{filename_prefix}{index}.mp3".format(filename_prefix=filename_prefix,index=str(index).zfill(3)), format=audio_format)
 
 
 if __name__ == '__main__':
@@ -40,6 +40,6 @@ if __name__ == '__main__':
     print "一共将{0}切割为{1}个单词,文件正在生成中，请稍后......".format(audio_file,str(total_words))
 
     for i, chunk in enumerate(chunks):
-        export_audio(chunk,filename_prefix=filename_prefix,index=i)
+        export_audio(chunk,filename_prefix=filename_prefix,index=i+1)
 
     print "OK~ 一共生成{total_words}个mp3文件，从{filename_prefix}1.mp3到{filename_prefix}{total_words}.mp3\n".format(total_words=str(total_words),filename_prefix=filename_prefix)
