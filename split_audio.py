@@ -24,7 +24,7 @@ def export_audio(audio_chunk,filename,index=1,audio_format="mp3"):
 
 def split_audio(path_to_file):
     #找到当前目录下的所有MP3，在同级目录下生成
-    print u"你选择的参数为\nmin_silence_len : {min_silence_len}\nsilence_thresh : {silence_thresh}\nkeep_silence : {keep_silence}\nfilename_prefix : {filename_prefix}".format(min_silence_len=min_silence_len,silence_thresh=silence_thresh,keep_silence=keep_silence,filename_prefix=filename_prefix)
+    print u"你选择的参数为\nmin_silence_len : {min_silence_len}\nsilence_thresh : {silence_thresh}\nkeep_silence : {keep_silence}".format(min_silence_len=min_silence_len,silence_thresh=silence_thresh,keep_silence=keep_silence)
     print "*"*20
     #audio_file = sys.argv[1]
     audio_file = path_to_file
@@ -42,9 +42,10 @@ def split_audio(path_to_file):
     print "一共将{0}切割为{1}个单词,文件正在生成中，请稍后......".format(audio_file,str(total_words))
 
     dirname = os.path.dirname(path_to_file)
-
+    basename = os.path.basename(path_to_file)
+    prefix = basename.split(".")[0]
     for i, chunk in enumerate(chunks):
-        filename = os.path.join(dirname,"{filename_prefix}_w{index}.mp3".format(filename_prefix="wwj",index=str(i).zfill(3)))
+        filename = os.path.join(dirname,"{filename_prefix}_w{index}.mp3".format(filename_prefix=prefix,index=str(i).zfill(3)))
         export_audio(chunk,filename,index=i+1)
 
     print "OK~ 一共生成{total_words}个mp3文件，从{filename_prefix}1.mp3到{filename_prefix}{total_words}.mp3\n".format(total_words=str(total_words),filename_prefix=filename_prefix)
